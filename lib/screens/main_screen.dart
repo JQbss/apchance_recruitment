@@ -1,4 +1,5 @@
 import 'package:apchance_recruitment/blocs/cities/cities_bloc.dart';
+import 'package:apchance_recruitment/blocs/connection/connection_bloc.dart';
 import 'package:apchance_recruitment/main.dart';
 import 'package:apchance_recruitment/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +15,12 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
+        BlocProvider<ConnectionBloc>(
+            create: (context) => ConnectionBloc()
+        ),
+        BlocProvider<CitiesBloc>(
           create: (context) =>
-            CitiesBloc(objectBoxRepository.cities)..add(const LoadCities()
-          )
+            CitiesBloc(objectBoxRepository.cities, context.read<ConnectionBloc>())
         ),
       ],
       child: MaterialApp(

@@ -7,9 +7,24 @@ abstract class CitiesEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadCities extends CitiesEvent{
+class LoadingCities extends CitiesEvent{
   final List<City> cities;
-  const LoadCities({this.cities = const <City>[]});
+  const LoadingCities({this.cities = const <City>[]});
+  @override
+  List<Object> get props => [cities];
+}
+
+class LoadCitiesOffline extends CitiesEvent{
+  final List<City> cities;
+  const LoadCitiesOffline({this.cities = const <City>[]});
+
+  @override
+  List<Object> get props => [cities];
+}
+
+class LoadCitiesOnline extends CitiesEvent{
+  final List<City> cities;
+  const LoadCitiesOnline({this.cities = const <City>[]});
 
   @override
   List<Object> get props => [cities];
