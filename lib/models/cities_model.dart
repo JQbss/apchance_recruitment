@@ -4,7 +4,7 @@ import 'package:objectbox/objectbox.dart';
 @Entity()
 class City extends Equatable{
   int? id;
-  final String name;
+  String name;
   final String cityImage;
   final String description;
   final bool isRead;

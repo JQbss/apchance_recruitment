@@ -14,15 +14,13 @@ class CityRepository implements ICityRepository{
 
   @override
   Future<List<City>> getCitiesOnline() async {
+    
     final response = await http.get(Uri.parse(_baseUrl));
     if(response.statusCode == 200){
       final resultJson = json.decode(response.body).cast<Map<String,dynamic>>();
       final List<City> result = resultJson.map<City>((json)=>City.fromJson(json)).toList();
-      _box.removeAll();
-      for(int i=0; i<result.length;i++){
-        result[i].id=null;
-        await _box.putAsync(result[i]);
-      }
+      final List<City> res2 = resultJson.map<City>((json)=>City.fromJson(json)).toList();
+      addToLocal(List.from(res2));
       return result;
     }else{
       throw Exception("Failed to load cities");
@@ -34,4 +32,12 @@ class CityRepository implements ICityRepository{
     return _box.getAll();
   }
 
+  void addToLocal(List<City> result)async{
+    _box.removeAll();
+    for(int i=0; i<result.length;i++){
+      result[i].id=null;
+      result[i].name="OFF "+result[i].name + " OFF";
+      await _box.putAsync(result[i]);
+    }
+  }
 }

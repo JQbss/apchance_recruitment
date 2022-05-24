@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:apchance_recruitment/blocs/connection/connection_bloc.dart';
+import 'package:apchance_recruitment/blocs/connect/connect_bloc.dart';
 import 'package:apchance_recruitment/models/cities_model.dart';
 import 'package:apchance_recruitment/repositories/city_repository.dart';
 import 'package:bloc/bloc.dart';
@@ -11,11 +11,11 @@ part 'cities_state.dart';
 
 class CitiesBloc extends Bloc<CitiesEvent, CitiesState> {
 
-  final ConnectionBloc connectionBloc;
+  final ConnectBloc connectBloc;
   final CityRepository _cityRepository;
   StreamSubscription? connectionSubscription;
 
-  CitiesBloc(this._cityRepository,this.connectionBloc) : super(CitiesLoading()) {
+  CitiesBloc(this._cityRepository,this.connectBloc) : super(CitiesLoading()) {
     on<LoadingCities>(_onLoadingCities);
     on<LoadCitiesOnline>(_onLoadCitiesOnline);
     on<LoadCitiesOffline>(_onLoadCitiesOffline);
@@ -37,7 +37,6 @@ class CitiesBloc extends Bloc<CitiesEvent, CitiesState> {
   }
 
   _onLoadCitiesOffline(LoadCitiesOffline event, Emitter<CitiesState> emit) {
-    print("here");
     final List<City> cities = _cityRepository.getCitiesOffline();
     emit(
         CitiesLoaded(cities: cities)
@@ -45,11 +44,15 @@ class CitiesBloc extends Bloc<CitiesEvent, CitiesState> {
   }
 
   void listenConnectivity(){
-    connectionSubscription = connectionBloc.stream.listen((state) {
+    if(connectBloc.state is ConnectionSuccess){
+      add(const LoadCitiesOnline());
+    }else{
+      add(const LoadCitiesOffline());
+    }
+    connectionSubscription = connectBloc.stream.listen((state) {
       if(state is ConnectionSuccess){
         add(const LoadCitiesOnline());
-      }else if(state is ConnectionFailure){
-        print(state);
+      }else if(state is ConnectionOffline){
         add(const LoadCitiesOffline());
       }
     });
