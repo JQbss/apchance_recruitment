@@ -4,49 +4,62 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:7956764302115727281",
-      "lastPropertyId": "5:6438148968062474679",
-      "name": "City",
+      "id": "2:1559454863827360489",
+      "lastPropertyId": "6:5148823018940306820",
+      "name": "Employee",
       "properties": [
         {
-          "id": "1:6654732761830482985",
+          "id": "1:7916774277888411471",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:4546657810616887297",
-          "name": "name",
+          "id": "2:5164903436154885968",
+          "name": "firstName",
           "type": 9
         },
         {
-          "id": "3:4273629231193640390",
-          "name": "cityImage",
+          "id": "3:806621257626099224",
+          "name": "lastName",
           "type": 9
         },
         {
-          "id": "4:2379871393855675577",
+          "id": "4:728290452057568074",
           "name": "description",
           "type": 9
         },
         {
-          "id": "5:6438148968062474679",
-          "name": "isRead",
-          "type": 1
+          "id": "5:4483954993123407252",
+          "name": "avatar",
+          "type": 9
+        },
+        {
+          "id": "6:5148823018940306820",
+          "name": "cityName",
+          "type": 9
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "1:7956764302115727281",
+  "lastEntityId": "2:1559454863827360489",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
-  "retiredEntityUids": [],
+  "retiredEntityUids": [
+    7956764302115727281
+  ],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    6654732761830482985,
+    4546657810616887297,
+    4273629231193640390,
+    2379871393855675577,
+    6438148968062474679
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

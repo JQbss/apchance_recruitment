@@ -1,13 +1,10 @@
-import 'package:apchance_recruitment/blocs/cities/cities_bloc.dart';
 import 'package:apchance_recruitment/blocs/connect/connect_bloc.dart';
+import 'package:apchance_recruitment/blocs/employees/employees_bloc.dart';
 import 'package:apchance_recruitment/main.dart';
 import 'package:apchance_recruitment/screens/home_screen.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-
-//https://color.adobe.com/pl/search?q=city&t=term
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -20,13 +17,14 @@ class MainScreen extends StatelessWidget {
         BlocProvider<ConnectBloc>(
             create: (context) => ConnectBloc()
         ),
-        BlocProvider<CitiesBloc>(
+        BlocProvider<EmployeesBloc>(
           create: (context) =>
-            CitiesBloc(objectBoxRepository.cities, context.read<ConnectBloc>())
+              EmployeesBloc(objectBoxRepository.employees, context.read<ConnectBloc>())
         ),
       ],
       child: MaterialApp(
-        title: "List of cities",
+        title: "List of employees"
+            "",
         theme: ThemeData(
             primarySwatch: Colors.indigo,
             primaryColor: const Color(0xff732929),

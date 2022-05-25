@@ -1,6 +1,6 @@
-import 'package:apchance_recruitment/blocs/cities/cities_bloc.dart';
 import 'package:apchance_recruitment/blocs/connect/connect_bloc.dart';
-import 'package:apchance_recruitment/widgets/city_card_widget.dart';
+import 'package:apchance_recruitment/blocs/employees/employees_bloc.dart';
+import 'package:apchance_recruitment/widgets/emplyee_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,20 +19,23 @@ class HomeScreen extends StatelessWidget {
               );
             }
           },
-          child: BlocBuilder<CitiesBloc, CitiesState>(
+          child: BlocBuilder<EmployeesBloc, EmployeesState>(
             builder: (context, state) {
-              if (state is CitiesLoading) {
+              if (state is EmployeesLoading) {
                 return const Center(child: CircularProgressIndicator());
               }
-              if (state is CitiesLoaded) {
-                return ListView.builder(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: state.cities.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CityCard(
-                          context: context, city: state.cities[index]);
-                    }
+              if (state is EmployeesLoaded) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: state.employees.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return EmployeeCard(
+                            context: context, employee: state.employees[index]);
+                      }
+                  ),
                 );
               }
               else {

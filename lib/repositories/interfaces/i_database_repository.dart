@@ -1,5 +1,5 @@
-import 'package:apchance_recruitment/repositories/interfaces/i_city_repository.dart';
+import 'package:apchance_recruitment/repositories/interfaces/i_emplyee_repository.dart';
 
 abstract class IDatabaseRepository{
-  ICityRepository get cities;
+  IEmployeeRepository get employees;
 }

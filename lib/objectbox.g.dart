@@ -13,41 +13,46 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'models/cities_model.dart';
+import 'models/employees_model.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
 final _entities = <ModelEntity>[
   ModelEntity(
-      id: const IdUid(1, 7956764302115727281),
-      name: 'City',
-      lastPropertyId: const IdUid(5, 6438148968062474679),
+      id: const IdUid(2, 1559454863827360489),
+      name: 'Employee',
+      lastPropertyId: const IdUid(6, 5148823018940306820),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
-            id: const IdUid(1, 6654732761830482985),
+            id: const IdUid(1, 7916774277888411471),
             name: 'id',
             type: 6,
             flags: 1),
         ModelProperty(
-            id: const IdUid(2, 4546657810616887297),
-            name: 'name',
+            id: const IdUid(2, 5164903436154885968),
+            name: 'firstName',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 4273629231193640390),
-            name: 'cityImage',
+            id: const IdUid(3, 806621257626099224),
+            name: 'lastName',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(4, 2379871393855675577),
+            id: const IdUid(4, 728290452057568074),
             name: 'description',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(5, 6438148968062474679),
-            name: 'isRead',
-            type: 1,
+            id: const IdUid(5, 4483954993123407252),
+            name: 'avatar',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 5148823018940306820),
+            name: 'cityName',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -74,37 +79,46 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 7956764302115727281),
+      lastEntityId: const IdUid(2, 1559454863827360489),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
-      retiredEntityUids: const [],
+      retiredEntityUids: const [7956764302115727281],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [
+        6654732761830482985,
+        4546657810616887297,
+        4273629231193640390,
+        2379871393855675577,
+        6438148968062474679
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
       version: 1);
 
   final bindings = <Type, EntityDefinition>{
-    City: EntityDefinition<City>(
+    Employee: EntityDefinition<Employee>(
         model: _entities[0],
-        toOneRelations: (City object) => [],
-        toManyRelations: (City object) => {},
-        getId: (City object) => object.id,
-        setId: (City object, int id) {
+        toOneRelations: (Employee object) => [],
+        toManyRelations: (Employee object) => {},
+        getId: (Employee object) => object.id,
+        setId: (Employee object, int id) {
           object.id = id;
         },
-        objectToFB: (City object, fb.Builder fbb) {
-          final nameOffset = fbb.writeString(object.name);
-          final cityImageOffset = fbb.writeString(object.cityImage);
+        objectToFB: (Employee object, fb.Builder fbb) {
+          final firstNameOffset = fbb.writeString(object.firstName);
+          final lastNameOffset = fbb.writeString(object.lastName);
           final descriptionOffset = fbb.writeString(object.description);
-          fbb.startTable(6);
+          final avatarOffset = fbb.writeString(object.avatar);
+          final cityNameOffset = fbb.writeString(object.cityName);
+          fbb.startTable(7);
           fbb.addInt64(0, object.id ?? 0);
-          fbb.addOffset(1, nameOffset);
-          fbb.addOffset(2, cityImageOffset);
+          fbb.addOffset(1, firstNameOffset);
+          fbb.addOffset(2, lastNameOffset);
           fbb.addOffset(3, descriptionOffset);
-          fbb.addBool(4, object.isRead);
+          fbb.addOffset(4, avatarOffset);
+          fbb.addOffset(5, cityNameOffset);
           fbb.finish(fbb.endTable());
           return object.id ?? 0;
         },
@@ -112,17 +126,19 @@ ModelDefinition getObjectBoxModel() {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
 
-          final object = City(
+          final object = Employee(
               id: const fb.Int64Reader()
                   .vTableGetNullable(buffer, rootOffset, 4),
-              name: const fb.StringReader(asciiOptimization: true)
+              firstName: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 6, ''),
-              cityImage: const fb.StringReader(asciiOptimization: true)
+              lastName: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 8, ''),
               description: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 10, ''),
-              isRead: const fb.BoolReader()
-                  .vTableGet(buffer, rootOffset, 12, false));
+              avatar: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 12, ''),
+              cityName: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 14, ''));
 
           return object;
         })
@@ -131,22 +147,28 @@ ModelDefinition getObjectBoxModel() {
   return ModelDefinition(model, bindings);
 }
 
-/// [City] entity fields to define ObjectBox queries.
-class City_ {
-  /// see [City.id]
-  static final id = QueryIntegerProperty<City>(_entities[0].properties[0]);
+/// [Employee] entity fields to define ObjectBox queries.
+class Employee_ {
+  /// see [Employee.id]
+  static final id = QueryIntegerProperty<Employee>(_entities[0].properties[0]);
 
-  /// see [City.name]
-  static final name = QueryStringProperty<City>(_entities[0].properties[1]);
+  /// see [Employee.firstName]
+  static final firstName =
+      QueryStringProperty<Employee>(_entities[0].properties[1]);
 
-  /// see [City.cityImage]
-  static final cityImage =
-      QueryStringProperty<City>(_entities[0].properties[2]);
+  /// see [Employee.lastName]
+  static final lastName =
+      QueryStringProperty<Employee>(_entities[0].properties[2]);
 
-  /// see [City.description]
+  /// see [Employee.description]
   static final description =
-      QueryStringProperty<City>(_entities[0].properties[3]);
+      QueryStringProperty<Employee>(_entities[0].properties[3]);
 
-  /// see [City.isRead]
-  static final isRead = QueryBooleanProperty<City>(_entities[0].properties[4]);
+  /// see [Employee.avatar]
+  static final avatar =
+      QueryStringProperty<Employee>(_entities[0].properties[4]);
+
+  /// see [Employee.cityName]
+  static final cityName =
+      QueryStringProperty<Employee>(_entities[0].properties[5]);
 }
