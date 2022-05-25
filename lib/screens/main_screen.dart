@@ -27,7 +27,7 @@ class MainScreen extends StatelessWidget {
             "",
         theme: ThemeData(
             primarySwatch: Colors.indigo,
-            primaryColor: const Color(0xff732929),
+            primaryColor: const Color(0xff1D0259),
             appBarTheme: const AppBarTheme(
                 color: Color(0xffF2AB9B)
             )
