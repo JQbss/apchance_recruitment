@@ -1,7 +1,7 @@
 import 'package:apchance_recruitment/blocs/connect/connect_bloc.dart';
 import 'package:apchance_recruitment/blocs/employees/employees_bloc.dart';
 import 'package:apchance_recruitment/widgets/banner_widget.dart';
-import 'package:apchance_recruitment/widgets/emplyee_card_widget.dart';
+import 'package:apchance_recruitment/widgets/employee_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

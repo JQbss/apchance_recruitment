@@ -1,5 +1,5 @@
 import 'package:apchance_recruitment/models/employees_model.dart';
-import 'package:apchance_recruitment/widgets/emplyee_details_widget.dart';
+import 'package:apchance_recruitment/widgets/employee_details_widget.dart';
 import 'package:flutter/material.dart';
 
 class EmployeeCard extends StatelessWidget {
