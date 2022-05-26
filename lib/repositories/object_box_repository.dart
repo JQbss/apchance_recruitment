@@ -9,5 +9,5 @@ class ObjectBoxRepository implements IDatabaseRepository{
   static Future<ObjectBoxRepository> create() async =>
       ObjectBoxRepository._(await openStore());
 
-      ObjectBoxRepository._(this._store) : employees = EmployeeRepository(_store);
+  ObjectBoxRepository._(this._store) : employees = EmployeeRepository(_store);
 }

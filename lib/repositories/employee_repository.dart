@@ -14,30 +14,42 @@ class EmployeeRepository implements IEmployeeRepository{
 
   @override
   Future<List<Employee>> getEmployeesOnline() async {
-    
-    final response = await http.get(Uri.parse(_baseUrl));
-    if(response.statusCode == 200){
-      final resultJson = json.decode(response.body).cast<Map<String,dynamic>>();
-      final List<Employee> result = resultJson.map<Employee>((json)=>Employee.fromJson(json)).toList();
-      final List<Employee> res2 = resultJson.map<Employee>((json)=>Employee.fromJson(json)).toList();
-      addToLocal(List.from(res2));
-      return result;
-    }else{
-      throw Exception("Failed to load cities");
+    try{
+      final response = await http.get(Uri.parse(_baseUrl));
+      if(response.statusCode == 200){
+        final resultJson = json.decode(response.body).cast<Map<String,dynamic>>();
+        final List<Employee> result = resultJson.map<Employee>((json)=>Employee.fromJson(json)).toList();
+        addToLocal([...result]);
+        return result;
+      }else if(response.statusCode == 500){
+        throw Exception("Server not responding");
+      }else{
+        throw Exception("Error occurred during loading data");
+      }
+    }on Exception{
+      throw Exception("Error occurred during downloading data");
     }
+
   }
 
   @override
   List<Employee> getEmployeesOffline() {
-    return _box.getAll();
+    try{
+      return _box.getAll();
+    }on Exception{
+      throw Exception("Error occurred during getting data from local database");
+    }
   }
 
   void addToLocal(List<Employee> result)async{
-    _box.removeAll();
-    for(int i=0; i<result.length;i++){
-      result[i].id=null;
-      result[i].firstName="OFF "+result[i].firstName + " OFF";
-      await _box.putAsync(result[i]);
+    try {
+      _box.removeAll();
+      for (int i = 0; i < result.length; i++) {
+        result[i].id = null;
+        await _box.putAsync(result[i]);
+      }
+    } on Exception {
+      throw Exception("Error occurred during save sata to local database");
     }
   }
 }

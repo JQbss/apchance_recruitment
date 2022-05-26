@@ -44,18 +44,31 @@ class BannerWidget extends StatelessWidget {
         ),
         Positioned(
           left: 20,
-          top: 30,
-          child: SizedBox(
-            width: 150,
-            child: Text(
-              title,
-              style: const TextStyle(
-                color: Color(0xff1D0259),
-                fontWeight: FontWeight.w700,
-                fontSize: 28,
+          top: 20,
+          child: TweenAnimationBuilder(
+            child: SizedBox(
+              width: 150,
+              child: Text(
+                title,
+                style: const TextStyle(
+                  color: Color(0xff1D0259),
+                  fontWeight: FontWeight.w700,
+                  fontSize: 28,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
+            tween: Tween<double>(begin: 0, end: 1),
+            duration: const Duration(milliseconds: 700),
+            builder: (context, double value, child) {
+              return Opacity(
+                opacity: value,
+                child: Padding(
+                  padding: EdgeInsets.only(top:value*20),
+                  child: child,
+                ),
+              );
+            },
           ),
         ),
       ],

@@ -1,6 +1,8 @@
+import 'package:apchance_recruitment/blocs/connect/connect_bloc.dart';
 import 'package:apchance_recruitment/models/employees_model.dart';
 import 'package:apchance_recruitment/widgets/banner_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EmployeeDetailsWidget extends StatelessWidget {
   final Employee employee;
@@ -8,6 +10,8 @@ class EmployeeDetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<ConnectBloc, ConnectState>(
+  builder: (context, state) {
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -23,17 +27,29 @@ class EmployeeDetailsWidget extends StatelessWidget {
                           padding: const EdgeInsets.all(10.0),
                           child: Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 10.0),
-                                child: Center(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(70.0),
-                                    child: Image.network(
-                                      employee.avatar
+                              if(state is ConnectionSuccess)
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 10.0),
+                                  child: Center(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(70.0),
+                                      child: Image.network(
+                                        employee.avatar,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              if(state is ConnectionOffline)
+                                const Padding(
+                                  padding: EdgeInsets.only(bottom: 10.0),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.image_not_supported,
+                                      size: 100,
+                                      color: Color(0xff1D0259),
+                                    ),
+                                  ),
+                                ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -105,5 +121,7 @@ class EmployeeDetailsWidget extends StatelessWidget {
         ),
       ),
     );
+  },
+);
   }
 }

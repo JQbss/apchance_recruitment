@@ -41,7 +41,7 @@ class MainScreen extends StatelessWidget {
             }
 
             return Container(
-              color: Colors.white70,
+              color: const Color(0xffE7DFF2),
               child: AlertDialog(
                 title: const Text("Connection Lost"),
                 content: const Text("You lost connection with network. If you want to continue with stored data press \"continue\"."),
