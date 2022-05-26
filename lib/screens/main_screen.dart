@@ -43,8 +43,18 @@ class MainScreen extends StatelessWidget {
             return Container(
               color: const Color(0xffE7DFF2),
               child: AlertDialog(
-                title: const Text("Connection Lost"),
-                content: const Text("You lost connection with network. If you want to continue with stored data press \"continue\"."),
+                title: const Text(
+                  "Connection Lost",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff1D0259),
+                    fontSize: 20.0,
+                  ),
+                ),
+                content: const Text(
+                  "You lost connection with network. If you want to continue with stored data press \"continue\". You can also press \"check\" to check connection.",
+                  textAlign: TextAlign.justify,
+                ),
                 actions: [
                   TextButton(
                       onPressed: () {

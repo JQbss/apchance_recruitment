@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       const BannerWidget(image: 'assets/undraw_flutter_dev_wvqj.png',title: "List of employees"),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                         child: ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
